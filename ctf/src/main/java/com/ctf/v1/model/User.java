@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 import java.io.File;
 import java.util.Date;
+import java.util.UUID;
 
 
 @Data
@@ -16,7 +17,7 @@ import java.util.Date;
 public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private UUID id;
     private String username;
     private String password;
     private String email;

@@ -1,6 +1,7 @@
 package com.ctf.v1.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class ChallengeService {
         return challengeRepository.save(challenge);
     }
 
-    public Challenge getChallengeById(Long challengeId) {
+    public Challenge getChallengeById(UUID challengeId) {
         return challengeRepository.findById(challengeId).orElse(null);
     }
 
@@ -29,7 +30,7 @@ public class ChallengeService {
         return challengeRepository.findAll();
     }
 
-    public void deleteChallenge(Long challengeId) {
+    public void deleteChallenge(UUID challengeId) {
         challengeRepository.deleteById(challengeId);
     }
 }

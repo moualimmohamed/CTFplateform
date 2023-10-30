@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+
+import java.util.UUID;
+
 import jakarta.persistence.*;
 
 
@@ -15,7 +18,7 @@ import jakarta.persistence.*;
 public class Player extends User{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private UUID id;
     private String role; // "owner" ou "member"
     private int score;
     

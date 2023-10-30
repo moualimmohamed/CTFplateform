@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -14,8 +15,8 @@ import java.util.Set;
 @Entity
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private String name;
 
     @Temporal(TemporalType.TIMESTAMP)

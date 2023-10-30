@@ -7,6 +7,7 @@ import com.ctf.v1.model.Team;
 import com.ctf.v1.service.TeamService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/teams") 
@@ -20,7 +21,7 @@ public class TeamController {
     }
 
     @GetMapping("/{teamId}")
-    public Team getTeam(@PathVariable Long teamId) {
+    public Team getTeam(@PathVariable UUID teamId) {
         return teamService.getTeamById(teamId);
     }
 
@@ -30,13 +31,13 @@ public class TeamController {
     }
 
     @PutMapping("/update/{teamId}")
-    public Team updateTeam(@PathVariable Long teamId, @RequestBody Team team) {
+    public Team updateTeam(@PathVariable UUID teamId, @RequestBody Team team) {
         team.setId(teamId);
         return teamService.updateTeam(team);
     }
 
     @DeleteMapping("/delete/{teamId}")
-    public void deleteTeam(@PathVariable Long teamId) {
+    public void deleteTeam(@PathVariable UUID teamId) {
         teamService.deleteTeam(teamId);
     }
 }

@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -16,7 +17,7 @@ import java.util.Set;
 public class Challenge {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private UUID id;
 
     private String title;
     private int prize;

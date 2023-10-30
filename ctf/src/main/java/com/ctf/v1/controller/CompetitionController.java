@@ -7,6 +7,7 @@ import com.ctf.v1.model.Competition;
 import com.ctf.v1.service.CompetitionService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/competitions") 
@@ -20,7 +21,7 @@ public class CompetitionController {
     }
 
     @GetMapping("/{competitionId}")
-    public Competition getCompetition(@PathVariable Long competitionId) {
+    public Competition getCompetition(@PathVariable UUID competitionId) {
         return competitionService.getCompetitionById(competitionId);
     }
 
@@ -30,13 +31,13 @@ public class CompetitionController {
     }
 
     @PutMapping("/update/{competitionId}")
-    public Competition updateCompetition(@PathVariable Long competitionId, @RequestBody Competition competition) {
+    public Competition updateCompetition(@PathVariable UUID competitionId, @RequestBody Competition competition) {
         competition.setId(competitionId);
         return competitionService.updateCompetition(competition);
     }
 
     @DeleteMapping("/delete/{competitionId}")
-    public void deleteCompetition(@PathVariable Long competitionId) {
+    public void deleteCompetition(@PathVariable UUID competitionId) {
         competitionService.deleteCompetition(competitionId);
     }
 }

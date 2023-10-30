@@ -17,7 +17,7 @@ import java.util.UUID;
 public class Team {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private UUID id;
 
     private String name;
     private int score;

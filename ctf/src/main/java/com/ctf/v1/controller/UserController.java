@@ -1,6 +1,7 @@
 package com.ctf.v1.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/{userId}")
-    public User getUser(@PathVariable Long userId) {
+    public User getUser(@PathVariable UUID userId) {
         return userService.getUserById(userId);
     }
 
@@ -30,13 +31,13 @@ public class UserController {
     }
 
     @PutMapping("/update/{userId}")
-    public User updateUser(@PathVariable Long userId, @RequestBody User user) {
+    public User updateUser(@PathVariable UUID userId, @RequestBody User user) {
         user.setId(userId);
         return userService.updateUser(user);
     }
 
     @DeleteMapping("/delete/{userId}")
-    public void deleteUser(@PathVariable Long userId) {
+    public void deleteUser(@PathVariable UUID userId) {
         userService.deleteUser(userId);
     }
 }

@@ -7,6 +7,7 @@ import com.ctf.v1.model.Player;
 import com.ctf.v1.service.PlayerService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/players") 
@@ -20,7 +21,7 @@ public class PlayerController {
     }
 
     @GetMapping("/{playerId}")
-    public Player getPlayer(@PathVariable Long playerId) {
+    public Player getPlayer(@PathVariable UUID playerId) {
         return playerService.getPlayerById(playerId);
     }
 
@@ -30,13 +31,13 @@ public class PlayerController {
     }
 
     @PutMapping("/update/{playerId}")
-    public Player updatePlayer(@PathVariable Long playerId, @RequestBody Player player) {
+    public Player updatePlayer(@PathVariable UUID playerId, @RequestBody Player player) {
         player.setId(playerId);
         return playerService.updatePlayer(player);
     }
 
     @DeleteMapping("/delete/{playerId}")
-    public void deletePlayer(@PathVariable Long playerId) {
+    public void deletePlayer(@PathVariable UUID playerId) {
         playerService.deletePlayer(playerId);
     }
 }

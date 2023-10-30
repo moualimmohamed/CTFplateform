@@ -7,6 +7,7 @@ import com.ctf.v1.model.Challenge;
 import com.ctf.v1.service.ChallengeService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/challenges") 
@@ -20,7 +21,7 @@ public class ChallengeController {
     }
 
     @GetMapping("/{challengeId}")
-    public Challenge getChallenge(@PathVariable Long challengeId) {
+    public Challenge getChallenge(@PathVariable UUID challengeId) {
         return challengeService.getChallengeById(challengeId);
     }
 
@@ -30,13 +31,13 @@ public class ChallengeController {
     }
 
     @PutMapping("/update/{challengeId}")
-    public Challenge updateChallenge(@PathVariable Long challengeId, @RequestBody Challenge challenge) {
+    public Challenge updateChallenge(@PathVariable UUID challengeId, @RequestBody Challenge challenge) {
         challenge.setId(challengeId);
         return challengeService.updateChallenge(challenge);
     }
 
     @DeleteMapping("/delete/{challengeId}")
-    public void deleteChallenge(@PathVariable Long challengeId) {
+    public void deleteChallenge(@PathVariable UUID challengeId) {
         challengeService.deleteChallenge(challengeId);
     }
 }

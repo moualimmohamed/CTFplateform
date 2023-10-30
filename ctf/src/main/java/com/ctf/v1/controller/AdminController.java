@@ -7,6 +7,7 @@ import com.ctf.v1.model.Admin;
 import com.ctf.v1.service.AdminService;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/admins")
@@ -20,7 +21,7 @@ public class AdminController {
     }
 
     @GetMapping("/{adminId}")
-    public Admin getAdmin(@PathVariable Long adminId) {
+    public Admin getAdmin(@PathVariable UUID adminId) {
         return adminService.getAdminById(adminId);
     }
 
@@ -30,13 +31,13 @@ public class AdminController {
     }
 
     @PutMapping("/update/{adminId}")
-    public Admin updateAdmin(@PathVariable Long adminId, @RequestBody Admin admin) {
+    public Admin updateAdmin(@PathVariable UUID adminId, @RequestBody Admin admin) {
         admin.setId(adminId);
         return adminService.updateAdmin(admin);
     }
 
     @DeleteMapping("/delete/{adminId}")
-    public void deleteAdmin(@PathVariable Long adminId) {
+    public void deleteAdmin(@PathVariable UUID adminId) {
         adminService.deleteAdmin(adminId);
     }
 }

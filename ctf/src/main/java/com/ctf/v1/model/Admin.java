@@ -6,6 +6,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
+
 import jakarta.persistence.*;
 
 
@@ -17,7 +19,7 @@ import jakarta.persistence.*;
 public class Admin extends User{
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private Long id;
+    private UUID id; 
 
     @OneToMany(mappedBy = "author")
     private Set<Challenge> createdChallenges = new HashSet<>();

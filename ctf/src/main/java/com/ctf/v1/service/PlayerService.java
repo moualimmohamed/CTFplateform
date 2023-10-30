@@ -1,6 +1,7 @@
 package com.ctf.v1.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ public class PlayerService {
         return playerRepository.save(player);
     }
 
-    public Player getPlayerById(Long playerId) {
+    public Player getPlayerById(UUID playerId) {
         return playerRepository.findById(playerId).orElse(null);
     }
 
@@ -29,7 +30,7 @@ public class PlayerService {
         return playerRepository.findAll();
     }
 
-    public void deletePlayer(Long playerId) {
+    public void deletePlayer(UUID playerId) {
         playerRepository.deleteById(playerId);
     }
 }
