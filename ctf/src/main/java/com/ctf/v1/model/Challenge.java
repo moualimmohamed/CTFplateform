@@ -30,6 +30,9 @@ public class Challenge {
     @Basic(fetch = FetchType.LAZY)
     private File attachment;
 
+    @ManyToMany(mappedBy = "solvedChallenges")
+    private Set<Player> solvers;
+
     @ManyToOne
     @JoinColumn(name = "author_id")
     private Admin author;
@@ -50,6 +53,6 @@ public class Challenge {
     public void removeCompetition(Competition competition) {
         competitions.remove(competition);
         competition.getChallenges().remove(this);
-    }
+    } 
 }
 

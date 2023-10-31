@@ -65,7 +65,7 @@ public class Competition {
     }
 
     public void removeChallenge(Challenge challenge) {
-        challenges.remove(challenge);
+        challenges.remove(challenge); 
         challenge.getCompetitions().remove(this);
     }
 
