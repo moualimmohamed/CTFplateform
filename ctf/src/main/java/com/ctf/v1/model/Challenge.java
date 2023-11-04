@@ -22,6 +22,7 @@ public class Challenge {
     private String title;
     private int prize;
     private String description;
+    private String flag;
     
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
