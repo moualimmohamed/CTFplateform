@@ -1,7 +1,7 @@
 package com.ctf.v1.service;
 
 import java.util.List;
-import java.util.UUID;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class AdminService {
         return adminRepository.save(admin);
     }
 
-    public Admin getAdminById(UUID adminId) {
+    public Admin getAdminById(Long adminId) {
         return adminRepository.findById(adminId).orElse(null);
     }
 
@@ -30,7 +30,7 @@ public class AdminService {
         return adminRepository.findAll();
     }
 
-    public void deleteAdmin(UUID adminId) {
+    public void deleteAdmin(Long adminId) {
         adminRepository.deleteById(adminId);
     }
 }

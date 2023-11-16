@@ -8,7 +8,6 @@ import com.ctf.v1.service.PlayerSolvedChallengeService;
 
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/player-solved-challenges")
@@ -24,7 +23,7 @@ public class PlayerSolvedChallengeController {
     }
 
     @GetMapping("/{id}")
-    public PlayerSolvedChallenge getPlayerSolvedChallengeById(@PathVariable UUID id) {
+    public PlayerSolvedChallenge getPlayerSolvedChallengeById(@PathVariable Long id) {
         return playerSolvedChallengeService.getPlayerSolvedChallengeById(id);
     }
 
@@ -34,7 +33,7 @@ public class PlayerSolvedChallengeController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deletePlayerSolvedChallenge(@PathVariable UUID id) {
+    public void deletePlayerSolvedChallenge(@PathVariable Long id) {
         playerSolvedChallengeService.deletePlayerSolvedChallenge(id);
     }
 

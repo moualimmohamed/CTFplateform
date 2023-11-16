@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -15,12 +14,19 @@ import java.util.UUID;
 @Entity
 public class Category {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "creation_date", nullable = false, updatable = false)
     private Date creationDate;
+
+    @PrePersist
+    protected void onCreate() {
+        this.creationDate = new Date();
+    }
 
     @OneToMany(mappedBy = "category")
     private Set<Challenge> challenges = new HashSet<>();

@@ -5,8 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.ctf.v1.model.PlayerSolvedChallenge;
 import com.ctf.v1.repository.PlayerSolvedChallengeRepository;
-
-import java.util.UUID;
 import java.util.List;
 
 @Service
@@ -19,7 +17,7 @@ public class PlayerSolvedChallengeService {
         return playerSolvedChallengeRepository.findAll();
     }
 
-    public PlayerSolvedChallenge getPlayerSolvedChallengeById(UUID id) {
+    public PlayerSolvedChallenge getPlayerSolvedChallengeById(Long id) {
         return playerSolvedChallengeRepository.findById(id).orElse(null);
     }
 
@@ -27,7 +25,7 @@ public class PlayerSolvedChallengeService {
         return playerSolvedChallengeRepository.save(playerSolvedChallenge);
     }
 
-    public void deletePlayerSolvedChallenge(UUID id) {
+    public void deletePlayerSolvedChallenge(Long id) {
         playerSolvedChallengeRepository.deleteById(id);
     }
 

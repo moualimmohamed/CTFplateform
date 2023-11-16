@@ -1,7 +1,6 @@
 package com.ctf.v1.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,7 @@ public class TeamService {
         return teamRepository.save(team);
     }
 
-    public Team getTeamById(UUID teamId) {
+    public Team getTeamById(Long teamId) {
         return teamRepository.findById(teamId).orElse(null);
     }
 
@@ -30,7 +29,7 @@ public class TeamService {
         return teamRepository.findAll();
     }
 
-    public void deleteTeam(UUID teamId) {
+    public void deleteTeam(Long teamId) {
         teamRepository.deleteById(teamId);
     }
 }

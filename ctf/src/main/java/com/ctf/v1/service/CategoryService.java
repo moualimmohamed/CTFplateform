@@ -1,7 +1,6 @@
 package com.ctf.v1.service;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +21,7 @@ public class CategoryService {
         return categoryRepository.save(category);
     }
 
-    public Category getCategoryById(UUID categoryId) {
+    public Category getCategoryById(Long categoryId) {
         return categoryRepository.findById(categoryId).orElse(null);
     }
 
@@ -30,7 +29,7 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public void deleteCategory(UUID categoryId) {
+    public void deleteCategory(Long categoryId) {
         categoryRepository.deleteById(categoryId);
     }
 }

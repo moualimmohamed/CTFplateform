@@ -8,7 +8,6 @@ import java.io.File;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
@@ -16,8 +15,8 @@ import java.util.UUID;
 @Entity
 public class Challenge {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String title;
     private int prize;
@@ -25,7 +24,13 @@ public class Challenge {
     private String flag;
     
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "creation_date", nullable = false, updatable = false)
     private Date creationDate;
+
+    @PrePersist
+    protected void onCreate() {
+        this.creationDate = new Date();
+    }
 
     @Lob
     @Basic(fetch = FetchType.LAZY)

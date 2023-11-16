@@ -10,20 +10,27 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Competition {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
     private String joinCode; 
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "creation_date", nullable = false, updatable = false)
     private Date creationDate;
+
+    @PrePersist
+    protected void onCreate() {
+        this.creationDate = new Date();
+    }
 
     @ManyToOne
     @JoinColumn(name = "admin_id")

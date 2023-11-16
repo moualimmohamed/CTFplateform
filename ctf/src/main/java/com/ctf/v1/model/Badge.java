@@ -7,7 +7,6 @@ import jakarta.persistence.*;
 
 import java.io.File;
 import java.util.Date;
-import java.util.UUID;
 
 
 @Data
@@ -16,8 +15,8 @@ import java.util.UUID;
 @Entity
 public class Badge {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String title;
     private String description;
@@ -26,7 +25,13 @@ public class Badge {
     private int requiredScore;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "creation_date", nullable = false, updatable = false)
     private Date creationDate;
+
+    @PrePersist
+    protected void onCreate() {
+        this.creationDate = new Date();
+    }
 
 
     

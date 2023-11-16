@@ -9,5 +9,6 @@ public class CtfApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CtfApplication.class, args);
 	}
+	
 
 }

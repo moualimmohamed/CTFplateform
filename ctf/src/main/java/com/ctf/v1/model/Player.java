@@ -2,26 +2,42 @@ package com.ctf.v1.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import java.io.File;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
-
 import jakarta.persistence.*;
 
 
 @Data
-@EqualsAndHashCode(callSuper=false)
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Player extends User{
+public class Player {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
-    private String role; // "owner" ou "member"
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String username;
+    private String password;
+    private String email;
+    
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private File profilePicture;
+    
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "registration_date", nullable = false, updatable = false)
+    private Date registrationDate;
+
+    @PrePersist
+    protected void onCreate() {
+        this.registrationDate = new Date();
+    }
+    
+    private String teamRole; // "owner" ou "member"
     private int score;
 
     @ManyToMany
@@ -44,12 +60,12 @@ public class Player extends User{
     private Team team;
 
     public void setOwnerRole() {
-        this.role = "owner";
+        this.teamRole = "owner";
     }
 
    
     public void setMemberRole() {
-        this.role = "member";
+        this.teamRole = "member";
     }
 
     

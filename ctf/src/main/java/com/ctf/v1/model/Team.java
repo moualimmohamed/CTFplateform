@@ -10,21 +10,28 @@ import java.util.Set;
 import java.util.UUID;
 
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 public class Team {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String name;
     private int score;
     private String joinCode; 
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "creation_date", nullable = false, updatable = false)
     private Date creationDate;
+
+    @PrePersist
+    protected void onCreate() {
+        this.creationDate = new Date();
+    }
 
     @ManyToOne
     @JoinColumn(name = "competition_id")
@@ -51,7 +58,7 @@ public class Team {
 
     public void removeMember(Player player) {
         members.remove(player);
-        player.setRole("");
+        player.setTeamRole("");
         player.setTeam(null);
     }
 

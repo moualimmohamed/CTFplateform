@@ -7,7 +7,7 @@ import com.ctf.v1.model.Badge;
 import com.ctf.v1.repository.BadgeRepository;
 
 import java.util.List;
-import java.util.UUID;
+
 
 @Service
 public class BadgeService {
@@ -18,7 +18,7 @@ public class BadgeService {
         return badgeRepository.findAll();
     }
 
-    public Badge getBadgeById(UUID id) {
+    public Badge getBadgeById(Long id) {
         return badgeRepository.findById(id).orElse(null);
     }
 
@@ -26,7 +26,7 @@ public class BadgeService {
         return badgeRepository.save(badge);
     }
 
-    public void deleteBadge(UUID id) {
+    public void deleteBadge(Long id) {
         badgeRepository.deleteById(id);
     }
 

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import com.ctf.v1.model.Badge;
 import com.ctf.v1.service.BadgeService;
 import java.util.List;
-import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/badges")
@@ -20,7 +20,7 @@ public class BadgeController {
     }
 
     @GetMapping("/{id}")
-    public Badge getBadgeById(@PathVariable UUID id) {
+    public Badge getBadgeById(@PathVariable Long id) {
         return badgeService.getBadgeById(id);
     }
 
@@ -30,7 +30,7 @@ public class BadgeController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deleteBadge(@PathVariable UUID id) {
+    public void deleteBadge(@PathVariable Long id) {
         badgeService.deleteBadge(id);
     }
 

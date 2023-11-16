@@ -7,7 +7,7 @@ import com.ctf.v1.model.Category;
 import com.ctf.v1.service.CategoryService;
 
 import java.util.List;
-import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/categories") 
@@ -21,7 +21,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{categoryId}")
-    public Category getCategory(@PathVariable UUID categoryId) {
+    public Category getCategory(@PathVariable Long categoryId) {
         return categoryService.getCategoryById(categoryId);
     }
 
@@ -31,13 +31,13 @@ public class CategoryController {
     }
 
     @PutMapping("/update/{categoryId}")
-    public Category updateCategory(@PathVariable UUID categoryId, @RequestBody Category category) {
+    public Category updateCategory(@PathVariable Long categoryId, @RequestBody Category category) {
         category.setId(categoryId);
         return categoryService.updateCategory(category);
     }
 
     @DeleteMapping("/delete/{categoryId}")
-    public void deleteCategory(@PathVariable UUID categoryId) {
+    public void deleteCategory(@PathVariable Long categoryId) {
         categoryService.deleteCategory(categoryId);
     }
 }
