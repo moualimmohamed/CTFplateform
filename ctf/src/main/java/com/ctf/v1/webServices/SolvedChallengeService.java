@@ -15,7 +15,9 @@ import java.util.Date;
 public class SolvedChallengeService {
     @Autowired
     private PlayerSolvedChallengeRepository playerSolvedChallengeRepository;
+    @Autowired
     private PlayerService playerService;
+    @Autowired
     private ChallengeService challengeService;
 
 

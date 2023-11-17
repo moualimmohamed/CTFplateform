@@ -30,6 +30,7 @@ public class AdminController {
         return adminService.getAllAdmins();
     }
 
+
     @PutMapping("/update/{adminId}")
     public Admin updateAdmin(@PathVariable Long adminId, @RequestBody Admin admin) {
         admin.setId(adminId);

@@ -11,11 +11,7 @@ import com.ctf.v1.service.ChallengeService;
 public class FlagCheckingService {
     @Autowired
     private ChallengeService challengeService;
-
     
-    public FlagCheckingService(ChallengeService challengeService) {
-        this.challengeService = challengeService;
-    }
 
     public boolean checkFlag(Long challengeId, String submittedFlag) {
         Challenge challenge = challengeService.getChallengeById(challengeId);

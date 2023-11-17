@@ -3,6 +3,7 @@ package com.ctf.v1.model;
 
 
 
+import java.io.Serializable;
 import java.util.Date;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ import lombok.NoArgsConstructor;
 
 @Table(name = "player_solved_challenge")
 
-public class PlayerSolvedChallenge {
+public class PlayerSolvedChallenge implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

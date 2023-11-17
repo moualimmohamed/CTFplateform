@@ -14,6 +14,7 @@ import com.ctf.v1.service.PlayerService;
 public class ScoringService {
     @Autowired
     private PlayerService playerService;
+    @Autowired
     private ChallengeService challengeService;
 
 

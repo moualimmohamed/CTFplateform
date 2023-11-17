@@ -32,6 +32,9 @@ public class TeamService {
     public void deleteTeam(Long teamId) {
         teamRepository.deleteById(teamId);
     }
+    public boolean isTeamNameExists(String teamName){
+        return teamRepository.existsByName(teamName);
+    }
 }
 
 

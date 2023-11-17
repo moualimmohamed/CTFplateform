@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
+
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +17,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Team {
+public class Team implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,6 +25,7 @@ public class Team {
     private String name;
     private int score;
     private String joinCode; 
+    private static final int MAX_MEMBERS = 5;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "creation_date", nullable = false, updatable = false)
@@ -68,6 +71,10 @@ public class Team {
 
     public boolean isJoinCodeValid(String code) {
         return code.equals(joinCode);
+    }
+
+    public static int getMaxMembers() {
+        return MAX_MEMBERS;
     }
 }
 

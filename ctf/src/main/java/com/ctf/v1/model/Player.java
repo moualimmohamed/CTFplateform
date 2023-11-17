@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +16,7 @@ import jakarta.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Player {
+public class Player implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

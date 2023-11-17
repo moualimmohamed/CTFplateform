@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -13,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Badge {
+public class Badge implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
