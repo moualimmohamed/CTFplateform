@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    /* @apply dark:bg-trueGray-900; */
+    @apply bg-gradient-to-r from-teal-500 via-teal-200 to-white dark:bg-gradient-to-r dark:from-trueGray-900 dark:via-teal-900 dark:to-teal-600;
+
+  }
+}
