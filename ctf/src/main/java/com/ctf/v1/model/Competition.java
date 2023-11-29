@@ -24,6 +24,7 @@ public class Competition implements Serializable {
 
     private String name;
     private String joinCode; 
+    private String status; //closed ou open 
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "creation_date", nullable = false, updatable = false)
@@ -55,6 +56,8 @@ public class Competition implements Serializable {
         competition.setName(name);
         competition.setJoinCode(generateUniqueJoinCode());
         owner.getCreatedCompetitions().add(competition);
+        competition.setAdmin(owner);
+        competition.setStatus("closed");
         return competition;
     }
 

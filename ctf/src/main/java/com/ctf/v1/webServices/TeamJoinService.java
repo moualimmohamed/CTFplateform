@@ -31,7 +31,6 @@ public class TeamJoinService {
 
         
         if (!team.isJoinCodeValid(joinCode)) {
-            throw new TeamJoinException("Invalid join code");
         }
 
         if (team.getMembers().size() >= Team.getMaxMembers()) {
