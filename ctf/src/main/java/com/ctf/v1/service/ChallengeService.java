@@ -32,6 +32,9 @@ public class ChallengeService {
     public void deleteChallenge(Long challengeId) {
         challengeRepository.deleteById(challengeId);
     }
+    public Boolean isChallengeNameExists(String title) {
+        return challengeRepository.existsByTitle(title);
+    }
 }
 
 

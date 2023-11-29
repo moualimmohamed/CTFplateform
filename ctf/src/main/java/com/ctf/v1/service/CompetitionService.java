@@ -2,7 +2,6 @@ package com.ctf.v1.service;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +36,8 @@ public class CompetitionService {
     public Boolean isCompetitionNameExists(String name) {
         return competitionRepository.existsByName(name);
     }
+
+    //should add get challengesID on each competition so we can implement the verification when adding a challenge
 }
 
 
