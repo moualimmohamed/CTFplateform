@@ -14,7 +14,7 @@ public class CompetitionAddChallenge {
     private CompetitionService competitionService;
     
     public Competition competitionAddChallenge(Competition competition, Challenge challenge){
-        //This part didn"t work [check the issue on competitionREPO]
+        //This part didn"t work [check the issue on competitionservice]
         //Set<Challenge> challenges = competition.getChallenges();
         //if (challenges.contains(challenge)) {
         //    throw new ChallengeException("The challenge doesn't exist");
