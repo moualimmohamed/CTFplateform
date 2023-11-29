@@ -33,6 +33,10 @@ public class CompetitionService {
     public void deleteCompetition(Long competitionId) {
         competitionRepository.deleteById(competitionId);
     }
+
+    public Boolean isCompetitionNameExists(String name) {
+        return competitionRepository.existsByName(name);
+    }
 }
 
 
