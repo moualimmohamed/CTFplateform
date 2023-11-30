@@ -3,6 +3,7 @@ package com.ctf.v1.webServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ctf.v1.exceptions.ChallengeException;
 import com.ctf.v1.model.Challenge;
 import com.ctf.v1.model.Competition;
 import com.ctf.v1.service.CompetitionService;
@@ -14,15 +15,12 @@ public class CompetitionAddChallenge {
     private CompetitionService competitionService;
     
     public Competition competitionAddChallenge(Competition competition, Challenge challenge){
-        //This part didn"t work [check the issue on competitionservice]
-        //Set<Challenge> challenges = competition.getChallenges();
-        //if (challenges.contains(challenge)) {
-        //    throw new ChallengeException("The challenge doesn't exist");
-        //    }
-        //else{
-        //    competition.addChallenge(challenge);
-        //}
-        competition.addChallenge(challenge);
+        if (competition.getChallenges().contains(challenge)) {
+            throw new ChallengeException("The challenge doesn't exist");
+            }
+        else{
+            competition.addChallenge(challenge);
+        }
         return competitionService.updateCompetition(competition);
     }
 }

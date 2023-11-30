@@ -37,7 +37,6 @@ public class CompetitionService {
         return competitionRepository.existsByName(name);
     }
 
-    //should add get challengesID on each competition so we can implement the verification when adding a challenge
 }
 
 
