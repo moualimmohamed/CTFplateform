@@ -55,13 +55,12 @@ public class WebFunctionalityController {
     @PostMapping("/flag/check-flag")
     public String checkFlag(@RequestParam Long playerId, @RequestParam Long challengeId, @RequestParam String submittedFlag) {
         if (flagCheckingService.checkFlag(challengeId, submittedFlag)) {
-            scoringService.updateScore(playerId, challengeId);
-            solvedChallengeService.markChallengeAsSolved(playerId, challengeId);
-            return "Flag is correct! Score updated.";
-        } else {
-            
-            return "Incorrect flag. Try again.";
-        }
+            if(solvedChallengeService.markChallengeAsSolved(playerId, challengeId)){
+                scoringService.updateScore(playerId, challengeId);
+                return "Flag is correct! Score updated.";
+            } else return "challenge already solved";
+        } else return "Incorrect flag! Try again.";
+        
     }
 
     

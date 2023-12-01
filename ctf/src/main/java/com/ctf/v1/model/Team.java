@@ -76,5 +76,9 @@ public class Team implements Serializable {
     public static int getMaxMembers() {
         return MAX_MEMBERS;
     }
+
+    public void flushScore(){
+        this.score = 0;
+    }
 }
 

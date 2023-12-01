@@ -29,6 +29,9 @@ public class PlayerSolvedChallengeService {
         playerSolvedChallengeRepository.deleteById(id);
     }
 
-    
+    public boolean hasPlayerSolvedChallenge(Long playerId, Long challengeId){
+        return playerSolvedChallengeRepository.existsByPlayerIdAndChallengeId(playerId, challengeId);
+
+    }
 }
 

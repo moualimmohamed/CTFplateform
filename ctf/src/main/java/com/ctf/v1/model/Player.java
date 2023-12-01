@@ -69,6 +69,10 @@ public class Player implements Serializable {
         this.teamRole = "member";
     }
 
+    public void flushScore(){
+        this.score = 0;
+    }
+
     
 }
 

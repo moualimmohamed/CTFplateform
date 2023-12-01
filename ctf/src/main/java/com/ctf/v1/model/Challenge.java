@@ -61,5 +61,7 @@ public class Challenge implements Serializable {
         competitions.remove(competition);
         competition.getChallenges().remove(this);
     } 
+    
+   
 }
 
