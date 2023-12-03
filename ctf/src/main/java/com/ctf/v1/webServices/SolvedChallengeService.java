@@ -8,8 +8,7 @@ import com.ctf.v1.model.PlayerSolvedChallenge;
 import com.ctf.v1.service.ChallengeService;
 import com.ctf.v1.service.PlayerService;
 import com.ctf.v1.service.PlayerSolvedChallengeService;
-
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 
@@ -30,7 +29,7 @@ public class SolvedChallengeService {
             PlayerSolvedChallenge playerSolvedChallenge = new PlayerSolvedChallenge();
             playerSolvedChallenge.setPlayer(playerService.getPlayerById(playerId));
             playerSolvedChallenge.setChallenge(challengeService.getChallengeById(challengeId));
-            playerSolvedChallenge.setSolvedDate(new Date());
+            playerSolvedChallenge.setSolvedDate(LocalDateTime.now());
 
             
             playerSolvedChallengeService.createPlayerSolvedChallenge(playerSolvedChallenge);

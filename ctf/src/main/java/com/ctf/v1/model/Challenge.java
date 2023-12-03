@@ -4,9 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
-import java.io.File;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,19 +22,15 @@ public class Challenge implements Serializable {
     private int prize;
     private String description;
     private String flag;
+    private String attachmentPath;
     
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "creation_date", nullable = false, updatable = false)
-    private Date creationDate;
+    private LocalDateTime creationDate;  
 
     @PrePersist
     protected void onCreate() {
-        this.creationDate = new Date();
+        this.creationDate = LocalDateTime.now();  
     }
-
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private File attachment;
 
     @ManyToMany(mappedBy = "solvedChallenges")
     private Set<Player> solvers;

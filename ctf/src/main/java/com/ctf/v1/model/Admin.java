@@ -3,11 +3,8 @@ package com.ctf.v1.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
-import java.io.File;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import jakarta.persistence.*;
@@ -25,18 +22,14 @@ public class Admin implements Serializable {
     private String username;
     private String password;
     private String email;
+    private String profilePicturePath;
     
-    @Lob
-    @Basic(fetch = FetchType.LAZY)
-    private File profilePicture;
-    
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "registration_date", nullable = false, updatable = false)
-    private Date registrationDate;
+    private LocalDateTime registrationDate;  
 
     @PrePersist
     protected void onCreate() {
-        this.registrationDate = new Date();
+        this.registrationDate = LocalDateTime.now(); 
     }
 
     @OneToMany(mappedBy = "author")

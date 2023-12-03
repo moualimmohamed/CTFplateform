@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -21,19 +21,17 @@ public class Team implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private int score;
     private String joinCode; 
     private static final int MAX_MEMBERS = 5;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "creation_date", nullable = false, updatable = false)
-    private Date creationDate;
+    private LocalDateTime creationDate;  
 
     @PrePersist
     protected void onCreate() {
-        this.creationDate = new Date();
+        this.creationDate = LocalDateTime.now(); 
     }
 
     @ManyToOne

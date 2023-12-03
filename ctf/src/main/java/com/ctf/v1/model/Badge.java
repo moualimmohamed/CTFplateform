@@ -4,10 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
-
-import java.io.File;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
+
 
 
 @Data
@@ -21,17 +20,16 @@ public class Badge implements Serializable {
 
     private String title;
     private String description;
-    private File logo; 
-    private Date achievmentDate;
+    private String logoPath; 
+    private LocalDateTime achievmentDate;
     private int requiredScore;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "creation_date", nullable = false, updatable = false)
-    private Date creationDate;
+    private LocalDateTime creationDate;  
 
     @PrePersist
     protected void onCreate() {
-        this.creationDate = new Date();
+        this.creationDate = LocalDateTime.now();  
     }
 
 
