@@ -1,4 +1,6 @@
 package com.ctf.v1.webServices;
+
+import com.ctf.v1.exceptions.TeamCreationException;
 import com.ctf.v1.model.Player;
 import com.ctf.v1.model.Team;
 import com.ctf.v1.service.PlayerService;
@@ -18,22 +20,26 @@ public class TeamCreationService {
     private PlayerService playerService;
 
     @Transactional
-    public Team createTeam(String teamName, Long ownerId) {
+    public Team createTeam(String teamName, Long ownerId) throws TeamCreationException {
+        try {
+            if (teamService.isTeamNameExists(teamName)) {
+                throw new TeamCreationException("Team name is already in use");
+            }
 
-        if (teamService.isTeamNameExists(teamName)) {
-            throw new IllegalArgumentException("Team name is already in use");
+            Player owner = playerService.getPlayerById(ownerId);
+
+            if (owner.getTeam() != null) {
+                throw new TeamCreationException("Player is already a member of a team");
+            }
+
+            owner.flushScore();
+            playerService.updatePlayer(owner);
+            Team newTeam = Team.createTeam(teamName, owner);
+
+            return teamService.createTeam(newTeam);
+        } catch (Exception e) {
+
+            throw new TeamCreationException("Error creating team"+ e.getMessage());
         }
-        
-        Player owner = playerService.getPlayerById(ownerId);
-
-        if (owner.getTeam() != null) {
-            throw new IllegalStateException("Player is already a member of a team");
-        }
-
-        Team newTeam = Team.createTeam(teamName, owner);
-
-        
-        return teamService.createTeam(newTeam);
     }
 }
-

@@ -25,6 +25,7 @@ public class Competition implements Serializable {
     private String name;
     private String joinCode; 
     private String status; //closed ou open 
+    private static final int MAX_TEAMS = 10;
 
     @Column(name = "creation_date", nullable = false, updatable = false)
     private LocalDateTime creationDate;  
@@ -82,6 +83,14 @@ public class Competition implements Serializable {
 
     private static String generateUniqueJoinCode() {
         return UUID.randomUUID().toString();
+    }
+
+    public boolean isJoinCodeValid(String code) {
+        return code.equals(joinCode);
+    }
+
+    public static int getMaxTeams() {
+        return MAX_TEAMS;
     }
 }
 

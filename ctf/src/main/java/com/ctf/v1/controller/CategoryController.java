@@ -2,9 +2,9 @@ package com.ctf.v1.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import com.ctf.v1.model.Category;
 import com.ctf.v1.service.CategoryService;
+
 
 import java.util.List;
 
@@ -24,7 +24,7 @@ public class CategoryController {
     public Category getCategory(@PathVariable Long categoryId) {
         return categoryService.getCategoryById(categoryId);
     }
-
+ 
     @GetMapping
     public List<Category> getAllCategories() {
         return categoryService.getAllCategories();
