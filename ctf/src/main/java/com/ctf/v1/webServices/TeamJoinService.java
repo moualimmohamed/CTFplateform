@@ -22,33 +22,32 @@ public class TeamJoinService {
 
     public void joinTeam(Long playerId, Long teamId, String joinCode) throws TeamJoinException {
         try {
-        Player player = playerService.getPlayerById(playerId);
-        Team team = teamService.getTeamById(teamId);
+            Player player = playerService.getPlayerById(playerId);
+            Team team = teamService.getTeamById(teamId);
 
-        if (player == null || team == null) {
-            throw new EntityNotFoundException("Player or Team not found");
+            if (player == null || team == null) {
+                throw new EntityNotFoundException("Player or Team not found");
+            }
+
+            if (!team.isJoinCodeValid(joinCode)) {
+                throw new TeamJoinException("invalid code");
+
+            }
+
+            if (team.getMembers().size() >= Team.getMaxMembers()) {
+                throw new TeamJoinException("Team is full");
+            }
+
+            if (team.getCompetition() != null) {
+                throw new TeamJoinException("Competition does not exist");
+            }
+
+            player.flushScore();
+            playerService.updatePlayer(player);
+            team.addMember(player);
+            teamService.updateTeam(team);
+        } catch (EntityNotFoundException e) {
+            throw new TeamJoinException("Error joining team. " + e.getMessage());
         }
-
-        
-        if (!team.isJoinCodeValid(joinCode)) {
-
-        }
-
-        if (team.getMembers().size() >= Team.getMaxMembers()) {
-            throw new TeamJoinException("Team is full");
-        }
-        
-        if (!(team.getCompetition() == null)) {
-        }
-
-        player.flushScore();
-        playerService.updatePlayer(player);
-        team.addMember(player);
-        teamService.updateTeam(team);
-    } catch (EntityNotFoundException e) {
-        throw new TeamJoinException("Error joining team. " + e.getMessage());
     }
 }
-}
-
-

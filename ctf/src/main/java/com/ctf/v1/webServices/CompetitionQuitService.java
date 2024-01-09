@@ -25,37 +25,33 @@ public class CompetitionQuitService {
     @Autowired
     private CompetitionService competitionService;
 
-     public void quitCompetition(Long playerId, Long teamId, Long competitionId) throws CompetitionQuitException {
+    public void quitCompetition(Long playerId, Long teamId, Long competitionId) throws CompetitionQuitException {
         try {
-        Player player = playerService.getPlayerById(playerId);
-        Team team = teamService.getTeamById(teamId);
-        Competition competition = competitionService.getCompetitionById(competitionId);
-        
-        if (player == null || team == null || competition == null) {
-            throw new EntityNotFoundException("Player or Team or competition not found");
-        }   
+            Player player = playerService.getPlayerById(playerId);
+            Team team = teamService.getTeamById(teamId);
+            Competition competition = competitionService.getCompetitionById(competitionId);
 
-        if (!(player.getTeam().equals(team))) {
-            
+            if (player == null || team == null || competition == null) {
+                throw new EntityNotFoundException("Player or Team or competition not found");
+            }
+
+            if (!(player.getTeam().equals(team))) {
+                throw new CompetitionQuitException("this team is not in the competition");
+            }
+
+            if (!(player.getTeamRole().equals("owner"))) {
+                throw new CompetitionQuitException("You are not the team owner");
+            }
+
+            if (!(team.getCompetition().equals(competition))) {
+                throw new CompetitionQuitException("Different Competition");
+            }
+            team.flushScore();
+            competition.removeTeam(team);
+            teamService.updateTeam(team);
+            competitionService.updateCompetition(competition);
+        } catch (EntityNotFoundException e) {
+            throw new CompetitionQuitException("Error quitting competition. " + e.getMessage());
         }
-
-        if (!(player.getTeamRole().equals("owner"))) {
-            throw new CompetitionQuitException("You are not the team owner");
-        }
-
-        if (!(team.getCompetition().equals(competition))){
-
-        }
-        team.flushScore();
-        competition.removeTeam(team);
-        teamService.updateTeam(team);
-        competitionService.updateCompetition(competition);
-    } catch (EntityNotFoundException e) {
-        throw new CompetitionQuitException("Error quitting competition. " + e.getMessage());
-    }
     }
 }
-
-
-       
-

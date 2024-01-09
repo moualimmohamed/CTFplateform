@@ -15,7 +15,7 @@ import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class CompetitionJoinService {
-    
+
     @Autowired
     private PlayerService playerService;
 
@@ -25,43 +25,42 @@ public class CompetitionJoinService {
     @Autowired
     private CompetitionService competitionService;
 
+    public void joinCompetition(Long playerId, Long competitionId, String joinCode) throws CompetitionJoinException {
 
-    public void joinCompetition(Long playerId,Long competitionId, String joinCode) throws CompetitionJoinException {
-        
         try {
-        Player player = playerService.getPlayerById(playerId);
-        Team team = teamService.getTeamById(player.getTeam().getId());
-        Competition competition = competitionService.getCompetitionById(competitionId);
+            Player player = playerService.getPlayerById(playerId);
+            Team team = teamService.getTeamById(player.getTeam().getId());
+            Competition competition = competitionService.getCompetitionById(competitionId);
 
-        if (player == null || team == null || competition == null) {
-            throw new EntityNotFoundException("Player or Team or competition not found");
+            if (player == null || team == null || competition == null) {
+                throw new EntityNotFoundException("Player or Team or competition not found");
+            }
+
+            if (!(player.getTeamRole().equals("owner"))) {
+                throw new CompetitionJoinException("You are not the team owner");
+            }
+
+            if (competition.getStatus().equals("closed")) {
+
+            }
+
+            if (!competition.isJoinCodeValid(joinCode)) {
+            }
+
+            if (!(team.getCompetition() == null)) {
+
+            }
+
+            if (competition.getTeams().size() >= Competition.getMaxTeams()) {
+                throw new CompetitionJoinException("Competition is full");
+            }
+
+            team.flushScore();
+            teamService.updateTeam(team);
+            competition.addTeam(team);
+            competitionService.updateCompetition(competition);
+        } catch (EntityNotFoundException e) {
+            throw new CompetitionJoinException("Error joining competition. " + e.getMessage());
         }
-
-        if (!(player.getTeamRole().equals("owner"))) {
-            throw new CompetitionJoinException("You are not the team owner");
-        }
-
-        if (competition.getStatus().equals("closed")){
-
-        }
-
-        if (!competition.isJoinCodeValid(joinCode)) {
-        }
-
-        if (!(team.getCompetition()==null)){
-
-        }
-
-        if (competition.getTeams().size() >= Competition.getMaxTeams()) {
-            throw new CompetitionJoinException("Competition is full");
-        }
-
-        team.flushScore();
-        teamService.updateTeam(team);
-        competition.addTeam(team);
-        competitionService.updateCompetition(competition);
-    } catch (EntityNotFoundException e) {
-        throw new CompetitionJoinException("Error joining competition. " + e.getMessage());
-    }
     }
 }
